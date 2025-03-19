@@ -59,7 +59,7 @@ void loop() {
             Encendido = false;
             Serial.println("Robot Apagado");
             beepApagado(); // Sonido de apagado
-            Detener();v// Detiene el movimiento de los motores
+            Detener();// Detiene el movimiento de los motores
         }
     }
 
@@ -73,12 +73,11 @@ void Avance() {
     adelante();
     distancia = ultrasonic();
 
-    if (distancia <= 15) { // Calibrado a 15 cm para detección
-        Detener();
+    if (distancia <= 5) { // Calibrado a 15 cm para detección
         beepObstaculo(); // Pitidos de advertencia
-
+        Detener();
         atras();
-        delay(300);
+        delay(200);
         Detener();
 
         L = miraizquierda();
@@ -109,7 +108,7 @@ int ultrasonic() {
     digitalWrite(Trig, LOW);
 
     long t = pulseIn(Echo, HIGH);
-    return t / 29 / 2; // Conversión a cm
+    return t / 58; // Conversión a cm
 }
 
 // Sonidos del buzzer
